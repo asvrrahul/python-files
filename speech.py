@@ -1,12 +1,13 @@
-#!/usr/bin/env python3
-# Requires PyAudio and PySpeech. 
 import speech_recognition as sr
  
 # Record Audio
 r = sr.Recognizer()
 with sr.Microphone() as source:
-    print("Say something!")
-    audio = r.listen(source) 
+	r.adjust_for_ambient_noise(source,duration=5)
+	r.dynamic_energy_threshold = True 
+	print("Say something!")
+	audio = r.listen(source) 
+
 # Speech recognition using Google Speech Recognition
 try:
     # for testing purposes, we're just using the default API key
